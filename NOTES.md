@@ -9,6 +9,8 @@
   로컬 폴더는 `C:\_c\system_mon` (10-13 에 사용자가 `syetem_mon` → `system_mon` 으로 바꾸라 함. 깃허브 저장소 이름은 안 바꿨다).
 - 커밋 작성자 주소는 `13573570+destory1984@users.noreply.github.com` (저장소에 박아 둠). push 는 사용자가 시킬 때만, 깃허브 전체로 1시간 간격.
 - 파일: `sysmon.py`(프로그램 전부), `test_sysmon.py`(시험 15개), `README.md`, `requirements.txt`(psutil, rich).
+- 실행 파일 `q` (10-13, 사용자가 시킴): Git Bash 에서 `./q` 로 띄운다. 옵션을 그대로 넘기고(`./q --once`) 다른 폴더에서 불러도 된다.
+  저장소에는 올리지 않는다 (`.gitignore` 의 `/q`). 윈도우에서는 `chmod 700` 만으로 실행 표시가 붙지 않아 첫 줄에 `#!/bin/sh` 를 넣었다.
 - 되는 것: 띄워 두고 2초마다 고치는 화면, `--once`(꾸밈 없는 글 한 번), `--sort cpu|mem`, `--top N`, `--interval`, `--no-gpu`.
 
 ## 왜 만들었나
