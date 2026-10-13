@@ -14,6 +14,6 @@ try:
         used = psutil.cpu_percent(interval=seconds)   # 그 사이 모든 코어의 평균
         ram = psutil.virtual_memory()
         print(f"{time.strftime('%H:%M:%S')}  CPU {used:3.0f}%  "
-              f"RAM {(ram.total - ram.available) / 2 ** 30:.1f}/{ram.total / 2 ** 30:.1f} GB", flush=True)
+              f"RAM {(ram.total - ram.available) / 2 ** 30:.1f} / {ram.total / 2 ** 30:.1f} GB", flush=True)
 except KeyboardInterrupt:
     pass
