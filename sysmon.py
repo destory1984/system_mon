@@ -83,6 +83,34 @@ def read_gpu():
     return parse_gpu(done.stdout) if done.returncode == 0 else []
 
 
+class _JobLimits(ctypes.Structure):
+    """윈도우 JOBOBJECT_EXTENDED_LIMIT_INFORMATION. LimitFlags 만 쓴다."""
+    _fields_ = [("PerProcessUserTimeLimit", ctypes.c_longlong), ("PerJobUserTimeLimit", ctypes.c_longlong),
+                ("LimitFlags", ctypes.c_ulong), ("MinimumWorkingSetSize", ctypes.c_size_t),
+                ("MaximumWorkingSetSize", ctypes.c_size_t), ("ActiveProcessLimit", ctypes.c_ulong),
+                ("Affinity", ctypes.c_size_t), ("PriorityClass", ctypes.c_ulong),
+                ("SchedulingClass", ctypes.c_ulong), ("IoCounters", ctypes.c_ulonglong * 6),
+                ("ProcessMemoryLimit", ctypes.c_size_t), ("JobMemoryLimit", ctypes.c_size_t),
+                ("PeakProcessMemoryUsed", ctypes.c_size_t), ("PeakJobMemoryUsed", ctypes.c_size_t)]
+
+
+def die_with_me(child):
+    """이 프로그램이 어떻게 끝나든(강제 종료 포함) child 도 같이 끝나게 윈도우 작업 개체에 넣는다.
+    돌려준 손잡이를 들고 있어야 한다 — 이 프로그램이 죽어 손잡이가 닫히면 윈도우가 child 를 끝낸다."""
+    if sys.platform != "win32":
+        return None
+    k32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    k32.CreateJobObjectW.restype = ctypes.c_void_p
+    k32.SetInformationJobObject.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_void_p, ctypes.c_ulong]
+    k32.AssignProcessToJobObject.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    job = k32.CreateJobObjectW(None, None)
+    limits = _JobLimits(LimitFlags=0x2000)   # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+    if not job or not k32.SetInformationJobObject(job, 9, ctypes.byref(limits), ctypes.sizeof(limits)):
+        return None
+    k32.AssignProcessToJobObject(job, int(child._handle))
+    return job
+
+
 class GpuWatch:
     """nvidia-smi 하나를 띄워 두고 그것이 간격마다 찍는 줄을 읽는다. 잴 때마다 새로 띄우면 한 번에 0.3초가 걸린다."""
 
@@ -96,6 +124,7 @@ class GpuWatch:
                 stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
         except OSError:
             return
+        self.job = die_with_me(self.child)
         threading.Thread(target=self._follow, daemon=True).start()
 
     def _follow(self):
