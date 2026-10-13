@@ -5,8 +5,8 @@
 
 ## 지금 상태
 
-- 저장소: https://github.com/destory1984/syetem_mon (이름의 오타 `syetem` 은 깃허브 저장소 이름 그대로다. 사용자가 만들었다).
-  로컬 폴더는 `C:\_c\system_mon` (10-13 에 사용자가 `syetem_mon` → `system_mon` 으로 바꾸라 함. 깃허브 저장소 이름은 안 바꿨다).
+- 저장소: https://github.com/destory1984/system_mon (공개). 로컬 폴더는 `C:\_c\system_mon`.
+  처음 이름은 오타가 난 `syetem_mon` 이었고, 10-13 에 사용자가 시켜 폴더와 깃허브 저장소 이름을 둘 다 고쳤다 (깃허브가 옛 주소를 새 주소로 넘겨준다).
 - 커밋 작성자 주소는 `13573570+destory1984@users.noreply.github.com` (저장소에 박아 둠). push 는 사용자가 시킬 때만, 깃허브 전체로 1시간 간격.
 - 파일: `sysmon.py`(프로그램 전부), `test_sysmon.py`(시험 15개), `README.md`, `requirements.txt`(psutil, rich).
 - 실행 파일 `q` (10-13, 사용자가 시킴): Git Bash 에서 `./q` 로 띄운다. 옵션을 그대로 넘기고(`./q --once`) 다른 폴더에서 불러도 된다.
@@ -44,4 +44,3 @@
 
 - 기록으로 남기기 (몇 분마다 파일에 한 줄) — 처음에 고를 수 있던 것 가운데 하나다.
 - 프로세스별 디스크·네트워크. 지금은 PC 전체 값만 보인다.
-- 깃허브 저장소 이름의 오타 고치기 (`syetem_mon` → `system_mon`). 고치면 README 의 clone 주소와 `git remote` 도 바꾼다.

@@ -20,8 +20,8 @@ game                                1           34%     1.4 GB
 Python 3.9 이상이 필요하다. Windows 에서 만들고 시험했다.
 
 ```bash
-git clone https://github.com/destory1984/syetem_mon.git
-cd syetem_mon
+git clone https://github.com/destory1984/system_mon.git
+cd system_mon
 pip install -r requirements.txt
 python sysmon.py
 ```
