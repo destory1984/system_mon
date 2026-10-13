@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.log
+*.csv
+.env
+NOTES.local.md
