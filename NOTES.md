@@ -9,6 +9,8 @@
   처음 이름은 오타가 난 `syetem_mon` 이었고, 10-13 에 사용자가 시켜 폴더와 깃허브 저장소 이름을 둘 다 고쳤다 (깃허브가 옛 주소를 새 주소로 넘겨준다).
 - 커밋 작성자 주소는 `13573570+destory1984@users.noreply.github.com` (저장소에 박아 둠). push 는 사용자가 시킬 때만, 깃허브 전체로 1시간 간격.
 - 파일: `sysmon.py`(프로그램 전부), `test_sysmon.py`(시험 15개), `README.md`, `requirements.txt`(psutil, rich).
+- `cpu.py` (10-13, 사용자: 「미니멀한 버전도 하나 만들어줘. 10초에 한 번씩 cpu 사용량을 text 로 출력, 10초 지나면 다음 줄에」) —
+  `17:07:55  CPU  48%` 한 줄씩. 첫 인자로 간격(초)을 바꾼다. `psutil.cpu_percent(interval=)` 하나라 시험은 두지 않았다.
 - 실행 파일 `q` (10-13, 사용자가 시킴): Git Bash 에서 `./q` 로 띄운다. 옵션을 그대로 넘기고(`./q --once`) 다른 폴더에서 불러도 된다.
   저장소에는 올리지 않는다 (`.gitignore` 의 `/q`). 윈도우에서는 `chmod 700` 만으로 실행 표시가 붙지 않아 첫 줄에 `#!/bin/sh` 를 넣었다.
 - 되는 것: 띄워 두고 2초마다 고치는 화면, `--once`(꾸밈 없는 글 한 번), `--sort cpu|mem`, `--top N`, `--interval`, `--no-gpu`.
