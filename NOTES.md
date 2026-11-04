@@ -12,7 +12,7 @@
 - 사용자는 주로 Git Bash 를 쓴다. 사용자에게 주는 명령은 bash 로 적는다 (`cd /c/_c/system_mon`).
 - 파일: `sysmon.py`(프로그램 전부), `test_sysmon.py`(시험 15개), `README.md`, `requirements.txt`(psutil, rich).
 - `cpu.py` (10-13, 사용자: 「미니멀한 버전도 하나 만들어줘. 10초에 한 번씩 cpu 사용량을 text 로 출력, 10초 지나면 다음 줄에」) —
-  `17:07:55  CPU  48%  RAM 21.3 / 32.0 GB` 한 줄씩 (RAM 은 사용자가 뒤에 더하라 함, 쓰는 양/전체). 첫 인자로 간격(초)을 바꾼다. `psutil.cpu_percent(interval=)` 하나라 시험은 두지 않았다.
+  `17:07:55 CPU  48%  RAM 21.3GB VRAM 3.6GB` 한 줄씩 (2026-11-05 사용자가 이 꼴로 바꾸라 함: RAM 은 쓰는 양만, VRAM 은 nvidia-smi 로 GPU 합, 실패하면 `-`). 첫 인자로 간격(초)을 바꾼다. `psutil.cpu_percent(interval=)` 하나라 시험은 두지 않았다.
 - 실행 파일 `q`(`sysmon.py`)와 `c`(`cpu.py`) (10-13, 사용자가 시킴): Git Bash 에서 `./q`, `./c` 로 띄운다. 옵션을 그대로 넘기고(`./q --once`, `./c 5`) 다른 폴더에서 불러도 된다.
   저장소에는 올리지 않는다 (`.gitignore` 의 `/q`, `/c`). 새 PC 에 받으면 다시 만들어야 한다 — 내용은 `#!/bin/sh` 와 `python "$(dirname "$0")/sysmon.py" "$@"` 두 줄. 윈도우에서는 `chmod 700` 만으로 실행 표시가 붙지 않아 첫 줄에 `#!/bin/sh` 를 넣었다.
 - 로그인할 때 `c` 창이 저절로 뜬다 (10-13, 사용자가 시킴): 시작 프로그램 폴더(`shell:startup`)의 `system_mon cpu.lnk` 가
