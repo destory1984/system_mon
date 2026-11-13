@@ -40,7 +40,7 @@ python sysmon.py
 
 ## 가장 단출하게: cpu.py
 
-CPU, RAM, VRAM 사용량을 10초마다 한 줄씩 찍는다. 화면을 지우지 않고 아래로 쌓인다.
+CPU, RAM, VRAM 사용량과 GPU 온도를 10초마다 한 줄씩 찍는다. 화면을 지우지 않고 아래로 쌓인다.
 
 ```bash
 python cpu.py        # 10초마다
@@ -48,12 +48,12 @@ python cpu.py 5      # 5초마다
 ```
 
 ```
-17:07:55 CPU  48%  RAM 21.3GB VRAM 3.6GB
-17:08:05 CPU  52%  RAM 21.4GB VRAM 3.6GB
-17:08:15 CPU  47%  RAM 21.3GB VRAM 3.6GB
+17:07:55 CPU  48% RAM 21.3 VRAM 3.6 48C
+17:08:05 CPU  52% RAM 21.4 VRAM 3.6 49C
+17:08:15 CPU  47% RAM 21.3 VRAM 3.6 48C
 ```
 
-CPU 는 그 10초 동안 모든 코어의 평균이다. RAM 과 VRAM 은 지금 쓰는 양(GB)이다. VRAM 은 `nvidia-smi` 로 읽으며, NVIDIA GPU 가 없으면 `-` 로 찍는다.
+CPU 는 그 10초 동안 모든 코어의 평균이다. RAM 과 VRAM 은 지금 쓰는 양(GB)이고, 맨 끝은 GPU 온도(섭씨)다. GPU 가 여럿이면 VRAM 은 더하고 온도는 가장 높은 값을 찍는다. VRAM 과 온도는 `nvidia-smi` 로 읽으며, NVIDIA GPU 가 없으면 `-` 로 찍는다.
 
 ## 숫자 읽는 법
 
