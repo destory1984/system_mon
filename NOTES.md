@@ -5,18 +5,18 @@
 
 ## 지금 상태
 
-- 저장소: https://github.com/destory1984/system_mon (공개). 로컬 폴더는 `C:\_c\system_mon`.
+- 저장소: https://github.com/destory1984/system_mon (공개). 로컬 폴더는 `C:\_c\util\system_mon` (11-15 에 옮겨짐).
   처음 이름은 오타가 난 `syetem_mon` 이었고, 10-13 에 사용자가 시켜 폴더와 깃허브 저장소 이름을 둘 다 고쳤다 (깃허브가 옛 주소를 새 주소로 넘겨준다).
 - 커밋 작성자 주소는 `13573570+destory1984@users.noreply.github.com` (저장소에 박아 둠). push 는 사용자가 시킬 때만, 깃허브 전체로 1시간 간격.
   첫 push 는 10-13 17:31 뒤 (사용자가 시킴. 그날 16:31 에 다른 저장소를 올려 1시간을 기다렸다).
-- 사용자는 주로 Git Bash 를 쓴다. 사용자에게 주는 명령은 bash 로 적는다 (`cd /c/_c/system_mon`).
+- 사용자는 주로 Git Bash 를 쓴다. 사용자에게 주는 명령은 bash 로 적는다 (`cd /c/_c/util/system_mon`).
 - 파일: `sysmon.py`(프로그램 전부), `test_sysmon.py`(시험 15개), `README.md`, `requirements.txt`(psutil, rich).
 - `cpu.py` (10-13, 사용자: 「미니멀한 버전도 하나 만들어줘. 10초에 한 번씩 cpu 사용량을 text 로 출력, 10초 지나면 다음 줄에」) —
   `17:07:55 CPU  48% RAM 21.3 VRAM 3.6 48C` 한 줄씩 (11-05 RAM 은 쓰는 양만, VRAM 은 nvidia-smi 로 GPU 합. 그 뒤 사용자가 손수 `GB` 를 빼고 칸을 줄임. 11-13 GPU 온도를 더하라 함, 여러 GPU 면 가장 높은 값. 실패하면 `-`). 첫 인자로 간격(초)을 바꾼다. `psutil.cpu_percent(interval=)` 하나라 시험은 두지 않았다.
 - 실행 파일 `q`(`sysmon.py`)와 `c`(`cpu.py`) (10-13, 사용자가 시킴): Git Bash 에서 `./q`, `./c` 로 띄운다. 옵션을 그대로 넘기고(`./q --once`, `./c 5`) 다른 폴더에서 불러도 된다.
   저장소에는 올리지 않는다 (`.gitignore` 의 `/q`, `/c`). 새 PC 에 받으면 다시 만들어야 한다 — 내용은 `#!/bin/sh` 와 `python "$(dirname "$0")/sysmon.py" "$@"` 두 줄. 윈도우에서는 `chmod 700` 만으로 실행 표시가 붙지 않아 첫 줄에 `#!/bin/sh` 를 넣었다.
 - 로그인할 때 `c` 창이 저절로 뜬다 (10-13, 사용자가 시킴): 시작 프로그램 폴더(`shell:startup`)의 `system_mon cpu.lnk` 가
-  `mintty.exe -p 3320,-405 -s 42,16 -t system_mon /usr/bin/bash -lc /c/_c/system_mon/c` 를 돌린다.
+  `mintty.exe -p 3320,-405 -s 42,16 -t system_mon /usr/bin/bash -lc /c/_c/util/system_mon/c` 를 돌린다.
   자리는 사용자가 띄워 둔 창을 잰 값이다 (위쪽 모니터, 실제 화소 기준 X 3320 · Y -405, 11-07 사용자가 왼쪽으로 조금 옮기라 해 100 화소 옮김, 419 × 385 화소 = 42칸 × 16줄, 11-13 온도를 더해 줄이 39자가 되자 3칸 넓힘. 글꼴 D2Coding 11, 배율 125%).
   모니터 배치나 글꼴을 바꾸면 자리가 어긋나니 다시 잰다. 지우려면 그 바로가기를 지운다. 재시작해서 뜨는 것은 아직 보지 않았다.
 - 되는 것: 띄워 두고 2초마다 고치는 화면, `--once`(꾸밈 없는 글 한 번), `--sort cpu|mem`, `--top N`, `--interval`, `--no-gpu`.
